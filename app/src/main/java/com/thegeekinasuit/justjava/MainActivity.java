@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import java.text.NumberFormat;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * This app displays an order form to order coffee.
@@ -27,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocholateCheckBox);
         boolean hasChocolate = chocolateCheckBox.isChecked();
+        EditText nameEditText = (EditText) findViewById(R.id.nameEditText);
+        String nameBuyer = nameEditText.getText().toString();
         int price = calculatePrice();
-        String priceMessage = createOrderSummary(price, hasWhippedCream, hasChocolate);
+        String priceMessage = createOrderSummary(price, hasWhippedCream, hasChocolate, nameBuyer);
         displayMessage(priceMessage);
 
     }
@@ -41,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         return price;
     }
 
-    private String createOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate) {
-        return "Name: Thanh Ha" +
+    private String createOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate, String nameBuyer) {
+        return "Name: " + nameBuyer +
                 "\nAdd Whipped Cream?: " + hasWhippedCream +
                 "\nAdd Chocolate?: " + hasChocolate +
                 "\nQuantity: " + numberOfCoffees +
